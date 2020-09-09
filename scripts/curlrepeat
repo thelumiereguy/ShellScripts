@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -b
+
+curl_format='time_namelookup:  %{time_namelookup}s
+time_connect: %{time_connect}s
+time_appconnect: %{time_appconnect}s
+time_pretransfer:  %{time_pretransfer}s
+time_redirect: %{time_redirect}s
+time_starttransfer:%{time_starttransfer}s
+    ----------\n
+time_total: %{time_total}s\n\n'
+
+for ((i=1;i<=10;i++)); 
+	do curl -w "$curl_format" -H "random":"$i" -o /dev/null -s "$@";
+done
